@@ -45,6 +45,10 @@ export default class Model {
         Model.register(name, this);
     }
 
+    get() {
+        return Model.getModel(this.#name).findAll();
+    }
+
     getName() {
         return this.#name;
     }

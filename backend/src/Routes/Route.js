@@ -20,6 +20,7 @@ class Route {
 
     static defineAllRoutes(app) {
         const names = Object.keys(Route.#routes);
+
         names.forEach(name => {
             const route = Route.#routes[name];
             app[route.getMethod().toLowerCase()](route.getPath(), route.getCallback());
