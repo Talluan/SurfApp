@@ -3,7 +3,7 @@
 
       
         <!-- <img src="/Surfometer/SurfDayImage?dayNumber=-20231114&amp;spotName=ST_GILLES_CROIX_VIE&amp;width=47&amp;height=300&amp;Options=" alt="" title="" width="47" height="300"> -->
-        <div>{{  conditionsSurf }}</div>
+        <div class="flex items-left">{{  conditionsSurf }}</div>
         <div> toutes les heures 9 12 15 18</div>
         <div> le vent     
             <p>sens du vent : {{ sensVent }}</p>
