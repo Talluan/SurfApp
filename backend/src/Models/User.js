@@ -21,9 +21,17 @@ const user = new Model("User", "users", {
     }
 );
 
-const create = async (data) => {
-    
 
+user.update = (data) => {
+    return new Promise((resolve, reject) => {
+        Model.getModel("User").update({password: data.password}, {where: {id: data.id}}).then(resolve).catch(reject);
+    });
+}
+
+user.delete = (data) => {
+    return new Promise((resolve, reject) => {
+        Model.getModel("User").destroy({where: {id: data.id}}).then(resolve).catch(reject);
+    });
 }
 
 export default user;

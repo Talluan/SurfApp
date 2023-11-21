@@ -18,6 +18,15 @@ class UnvalidParam extends Error {
     }
 }
 
+class MissingParam extends Error {
+    constructor(src, params) {
+        super();
+        this.name = this.constructor.name;
+        this.message = "Missing param for " + src + ". Required params are : " + params;
+        this.statusCode = 400;
+    }
+}
+
 class InvalidRequest extends Error {
     constructor(src = "this data") {
         super();
@@ -71,6 +80,7 @@ export {
     UnvalidParam,
     ForbiddenAccess,
     MissingToken,
+    MissingParam,
     InvalidRequest,
     TokenExpiredError,
     InvalidToken
