@@ -24,6 +24,6 @@
 /frontend/*.sln
 /frontend/*.sw?
 
-/backend/.vscode/*
+.vscode
 
 .env
