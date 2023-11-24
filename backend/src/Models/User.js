@@ -1,3 +1,4 @@
+import { UserAlreadyExists } from "../Utils/Error.js";
 import Model from "./Model.js";
 import { DataTypes } from "sequelize";
 
@@ -21,6 +22,17 @@ const user = new Model("User", "users", {
     }
 );
 
+user.getByUsername = (username) => {
+    return new Promise((resolve, reject) => {
+        Model.getModel("User").findOne({where: {username: username}}).then(resolve).catch(reject);
+    });
+}
+
+user.create = (data) => {
+    return new Promise((resolve, reject) => {
+        Model.getModel("User").create(data).then(resolve).catch(reject);
+    });
+};
 
 user.update = (data) => {
     return new Promise((resolve, reject) => {
@@ -31,6 +43,12 @@ user.update = (data) => {
 user.delete = (data) => {
     return new Promise((resolve, reject) => {
         Model.getModel("User").destroy({where: {id: data.id}}).then(resolve).catch(reject);
+    });
+}
+
+user.login = (data) => {
+    return new Promise((resolve, reject) => {
+        Model.getModel("User").findOne({where: {username: data.username, password: data.password}}).then(resolve).catch(reject);
     });
 }
 
