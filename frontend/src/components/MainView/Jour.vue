@@ -1,6 +1,6 @@
 <template>
-    <div>Je suis un jour</div>
-
+  <div>Mon dashboard</div>
+  
   <el-space direction="horizontal">
     <el-card v-for="i in 3" :key="i" class="box-card" style="width: auto">
       <template #header>
@@ -14,15 +14,11 @@
         <p>la hauteur de la houle : {{ hauteurHoule }} intervalle  de la houle : {{ intervalleHoule }}</p>
         <p>la hauteur de la houle : {{ hauteurHoule }} intervalle  de la houle : {{ intervalleHoule }}</p>
         <p>La température extérieur : {{ tempExterieur }} La température de l'eau : {{ tempEaux }}</p>
-        
       </div>
     </el-card>
   </el-space>
-
-
-
-
-
+    
+        
  <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex">
         <a href="#">
             <img class="rounded-t-lg" src="https://erikflowers.github.io/weather-icons/wi-yahoo-0: tornado " alt="" />
@@ -39,14 +35,24 @@
         
         </div>
 
-           <!--  <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Read more
-             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-            </svg>
-        </a> -->
-
             <div> toutes les heures 9 12 15 18</div>
+<!-- 
+            <div className="googleMap mx-auto mt-2 md:w-[50vw] md:h-[50vh] md:inline-block md:justify-center">
+                    <div className="text-white w-full h-full justify-center p-5">
+                        
+                         <div   className="aspect-video w-full h-full justify-center rounded-lg"
+                         src={`https://www.google.com/maps?q=@46.6880479,-1.9413342,14z/&output=embed`}
+                         width="auto"
+                         height="auto"
+                         loading="lazy"
+                         referrerPolicy="no-referrer-when-downgrade"
+                         title="Google Maps">
+                         
+                        </div>
+                        /*src={`https://www.google.com/maps?q=${latitude},${longitude}&output=embed`} 
+                  </div>
+                </div>        
+    -->
         
  </div>
 </template>
