@@ -1,6 +1,6 @@
 import UserModel from "../Models/User.js";
 import { verifyBodyParams } from "../Helper/Request.js";
-import { MissingParam, WrongCredentials } from "../Utils/Error.js";
+import { DataNotFound, MissingParam, WrongCredentials } from "../Utils/Error.js";
 import bcrypt from "bcrypt";
 import { UserAlreadyExists } from "../Utils/Error.js";
 import { isNullOrUndefined } from "../Helper/Tools.js";
@@ -27,6 +27,8 @@ class User {
         if (user) {
             throw new UserAlreadyExists("username", data.username);
         }
+        const newPassword = await User.hashPassword(data.password);
+        data.password = newPassword;
         const newUser = await UserModel.create(data);
         return newUser;
     }
@@ -74,19 +76,20 @@ class User {
      * Logs in a user.
      * @param {Object} data - The user login data.
      * @returns {Promise} A promise that resolves with the logged-in user or rejects with an error.
-     * @throws {MissingParam} If required parameters are missing.
+     * @throws {MissingParam, WrongCredentials} If required parameters are missing.
      */
     static login = async (data) => {
         const requiredParams =  ["username", "password"];
         if(!verifyBodyParams(data, requiredParams)) {
             throw new MissingParam("User", requiredParams);
         }
-        const hashedPassword = await User.hashPassword(data.password);
-        console.log(hashedPassword);
-        data.password = hashedPassword;
-        const user = await UserModel.login(data);
+        const user = await UserModel.getByUsername(data.username);
         if (isNullOrUndefined(user)) {
-            throw new WrongCredentials();
+            throw new DataNotFound("User", data.username);
+        }
+        const isSimilar = await bcrypt.compare(data.password, user.password);
+        if (!isSimilar) {
+            throw new WrongCredentials("User", data.username);
         }
         return user;
     }

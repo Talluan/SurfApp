@@ -46,10 +46,4 @@ user.delete = (data) => {
     });
 }
 
-user.login = (data) => {
-    return new Promise((resolve, reject) => {
-        Model.getModel("User").findOne({where: {username: data.username, password: data.password}}).then(resolve).catch(reject);
-    });
-}
-
 export default user;
