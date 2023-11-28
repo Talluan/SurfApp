@@ -1,8 +1,6 @@
 import Logger from "../Utils/Logger.js";
 import { Route, METHOD } from "./Route.js";
-import { models } from "../Models/Models.js";
 import User from "../Controllers/User.js";
-import { reject } from "bcrypt/promises.js";
 
 
 new Route("get Users", METHOD.GET, "/users", async (req, res, next) => {
