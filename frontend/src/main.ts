@@ -5,6 +5,7 @@ import './style.css';
 import App from './App.vue';
 import 'element-plus/dist/index.css'
 import { createPinia } from 'pinia';
+import router from './router';
 
 const pinia = createPinia();
 
@@ -16,4 +17,6 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 }
 
 app.use(pinia);
+app.use(router);
+
 app.mount('#app');
