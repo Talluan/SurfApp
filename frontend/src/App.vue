@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import Prevision from './components/MainView/Prevision.vue';
-</script>
-
 <template>
   <el-header>
     <el-menu mode="horizontal" :ellipsis="false">
@@ -27,22 +23,15 @@ import Prevision from './components/MainView/Prevision.vue';
 
 </template> 
 
-<!-- <script setup>
-import { computed } from 'vue';
-import { useRouter } from 'vue-router';
-import { useStore } from 'vuex';
+<script setup>
+    import Prevision from './components/MainView/Prevision.vue';
 
-const router = useRouter();
-const store = useStore();
+    import { computed } from 'vue';
+    import { useRouter } from 'vue-router';
 
-//const loggedIn = computed(() => store.getters.loggedIn);
+    const router = useRouter();
+  </script>
 
- const logout = () => {
-    store.dispatch('logout');
-    router.push({ name: 'Login' });
-};
- 
- </script> -->
 
 <style scoped>
 .logo {
