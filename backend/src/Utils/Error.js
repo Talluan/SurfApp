@@ -18,6 +18,33 @@ class UnvalidParam extends Error {
     }
 }
 
+class UserAlreadyExists extends Error {
+    constructor(src, param) {
+        super();
+        this.name = this.constructor.name;
+        this.message = "User already exists for " + src + " : " + param;
+        this.statusCode = 403;
+    }
+}
+
+class MissingParam extends Error {
+    constructor(src, params) {
+        super();
+        this.name = this.constructor.name;
+        this.message = "Missing param for " + src + ". Required params are : " + params;
+        this.statusCode = 400;
+    }
+}
+
+class WrongCredentials extends Error {
+    constructor() {
+        super();
+        this.name = this.constructor.name;
+        this.message = "Wrong credentials";
+        this.statusCode = 401;
+    }
+}
+
 class InvalidRequest extends Error {
     constructor(src = "this data") {
         super();
@@ -71,7 +98,10 @@ export {
     UnvalidParam,
     ForbiddenAccess,
     MissingToken,
+    MissingParam,
     InvalidRequest,
     TokenExpiredError,
-    InvalidToken
+    UserAlreadyExists,
+    InvalidToken,
+    WrongCredentials
 }
