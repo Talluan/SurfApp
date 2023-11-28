@@ -40,6 +40,4 @@ const holderLogin = async () => {
     }
 }
 
-
-
 </script>
