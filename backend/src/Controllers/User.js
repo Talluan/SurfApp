@@ -3,7 +3,7 @@ import { verifyBodyParams } from "../Helper/Request.js";
 import { DataNotFound, MissingParam, WrongCredentials } from "../Utils/Error.js";
 import bcrypt from "bcrypt";
 import { UserAlreadyExists } from "../Utils/Error.js";
-import { isNullOrUndefined } from "../Helper/Tools.js";
+import { isNullOrUndefined, generateToken } from "../Helper/Tools.js";
 
 
 /**
@@ -91,7 +91,13 @@ class User {
         if (!isSimilar) {
             throw new WrongCredentials("User", data.username);
         }
-        return user;
+        const token = generateToken({id: user.id, username: user.username}, 24);
+
+        return {
+            id: user.id,
+            username: user.username,
+            token: token
+        };
     }
 
     /**

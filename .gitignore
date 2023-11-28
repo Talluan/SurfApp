@@ -25,5 +25,6 @@
 /frontend/*.sw?
 
 .vscode
+database.sqlite
 
 .env
