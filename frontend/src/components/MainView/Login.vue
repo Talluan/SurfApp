@@ -24,14 +24,12 @@
 <script setup>
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import { useStore } from 'vuex';
 
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
 import { sha256 } from 'js-sha256';
 
 const router = useRouter();
-const store = useStore();
 
 const form = reactive({ username: '', password: '' });
 

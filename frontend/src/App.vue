@@ -16,7 +16,7 @@
     </el-menu>
   </el-header>
   <el-container>
-      <img  src="/public/surfmap-header.jpeg"  />
+      <img  src="/surfmap-header.jpeg"  />
   </el-container>
 
   <Prevision />
