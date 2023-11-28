@@ -24,4 +24,7 @@
 /frontend/*.sln
 /frontend/*.sw?
 
+.vscode
+database.sqlite
+
 .env

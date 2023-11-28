@@ -1,9 +1,11 @@
 <script setup lang="ts">
   import Prevision from './components/MainView/Prevision.vue';
+  import Login from './components/AccountView/Login.vue';
 </script>
 
 <template>
-  <Prevision/>
+  <!-- <Prevision/> -->
+    <Login/>
 </template>
 
 <style scoped>

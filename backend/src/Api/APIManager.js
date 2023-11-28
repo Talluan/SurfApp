@@ -11,9 +11,7 @@ class APIManager {
     static #createAPI() {
         return new Promise((resolve, reject) => {
             Logger.info("Creating API Configuration ...");
-            const port = process.env.API_PORT;
-            console.log("port" + port);
-            const apiConfig = new APIConfig(port);
+            const port = process.env.API_PORT;            const apiConfig = new APIConfig(port);
             Logger.success("DONE");
 
             try {
