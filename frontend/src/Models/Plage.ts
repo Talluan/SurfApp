@@ -7,7 +7,7 @@ export default class Plage {
     description: string;
     image: string;
 
-    constructor(id: number, name: string, location: string, latitude: number, longitude: number, description: string, image: string, user_id: number) {
+    constructor(id: number, name: string, location: string, latitude: number, longitude: number, description: string, image: string) {
         this.id = id;
         this.name = name;
         this.location = location;

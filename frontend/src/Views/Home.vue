@@ -1,11 +1,21 @@
 <template>
-	<Plage  />
+	<el-main>
+		<el-carousel :interval="4000" arrow="always" indicator-position="outside" style="height: auto;">
+			<el-carousel-item v-for="plage in plages" :key="plage.id">
+				<card :plage="plage" />
+			</el-carousel-item>
+		</el-carousel>
+	</el-main>
 </template>
 
 <script setup lang="ts">
-import Plage from '../components/Plage/Plage.vue';
+// import Plage from '../components/Plage/Plage.vue';
 import { useUserStore } from '../Stores/UserStore.ts';
 import PlageModel from "../Models/Plage.ts";
+import Card from '../components/MainView/Card.vue';
+
+const store = useUserStore();
+
 
 const LePorge = new PlageModel(
 	1,
@@ -24,7 +34,7 @@ const Mimizan = new PlageModel(
 	44.2,
 	-1.3,
 	"La plage de Mimizan est une plage de sable fin située sur la côte atlantique. Elle est idéale pour les familles avec enfants car elle est peu profonde et il y a beaucoup d'activités à faire. La plage est également populaire auprès des surfeurs et des bodyboarders.",
-	"/images/mimizan.jpg"
+	"/images/mimizan.jpeg"
 );
 
 const Lacanau = new PlageModel(
@@ -37,8 +47,11 @@ const Lacanau = new PlageModel(
 	"/images/lacanau.jpg"
 );
 
+const plages = [LePorge, Mimizan, Lacanau];
 
 
-const store = useUserStore();
 </script>
-```
+
+
+
+<style scoped></style>
