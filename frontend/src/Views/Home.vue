@@ -9,11 +9,13 @@
 </template>
 
 <script setup lang="ts">
+import { usePlagesStore } from '../Stores/PlageStore.ts';
 import PlageModel from "../Models/Plage.ts";
 import Card from '../components/MainView/Card.vue';
 import { getPlages } from '../Services/PlageCalls.ts';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
+const plageStore = usePlagesStore();
 
 const plages = ref();
 
@@ -22,14 +24,16 @@ const fetchPlages = async () => {
 		const response : any = await getPlages();
 		if (response && response.data) {
 			plages.value = PlageModel.fromArray(response.data);
+			plageStore.setPlages(plages.value);
 		}
 	} catch (error) {
 		console.error(error);
 	}
 };
 
-
-fetchPlages();
+onMounted(() => {
+	fetchPlages();
+});
 
 </script>
 
