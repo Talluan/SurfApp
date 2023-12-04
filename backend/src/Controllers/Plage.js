@@ -18,10 +18,12 @@ class Plage {
         if(!verifyBodyParams(data, requiredParams)) {
             throw new MissingParam("Plage", requiredParams);
         }
+        console.log("getBynom");
         const plage = await PlageModel.getByNom(data.nom);
         if (plage) {
             throw new PlageAlreadyExists("nom", data.nom);
         }
+        console.log("create plage");
         const newPlage = await PlageModel.create(data);
         return newPlage;
     }
@@ -32,7 +34,10 @@ class Plage {
      */
     static getPlages = () => {
         return new Promise((resolve, reject) => {
-            PlageModel.get().then(resolve).catch(reject);
+            PlageModel.get().then(resolve).catch((error) => {
+                console.log(error);
+                reject(error);
+            });
         });
     }
 

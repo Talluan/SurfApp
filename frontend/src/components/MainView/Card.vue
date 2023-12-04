@@ -1,6 +1,5 @@
 <template>
 	<el-card :body-style="{ padding: '10px' }" style="height: auto;">
-	  <img :src="plage.image" alt="Plage Image" />
 	  <div style="text-align: center; margin-top: 10px;">
 		<h3>{{ plage.name }}</h3>
 		<p>{{ plage.location }}</p>
@@ -22,11 +21,11 @@ const props = defineProps({
 
 const plage = ref<Plage>(props.plage);
 
+console.log(plage.value);
 
 
 const voirDetails = () => {
-	// Ajoutez ici la logique pour afficher les détails de la plage
-	console.log('Voir les détails de la plage :', plage.value);
+	
 };
 </script>
   

@@ -13,6 +13,10 @@ const plage = new Model("Plage", "plage", {
             allowNull: false,
             unique: true
         },
+        location: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         latitude: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -20,7 +24,15 @@ const plage = new Model("Plage", "plage", {
         longitude: {
             type: DataTypes.STRING,
             allowNull: false,
-        }
+        },
+        description: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        images: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
     }, () => {
 
     }
@@ -34,7 +46,10 @@ plage.getByNom = (nom) => {
 
 plage.create = (data) => {
     return new Promise((resolve, reject) => {
-        Model.getModel("Plage").create(data).then(resolve).catch(reject);
+        Model.getModel("Plage").create(data).then(resolve).catch((error) => {
+            console.log(error);
+            reject(error);
+        });
     });
 };
 

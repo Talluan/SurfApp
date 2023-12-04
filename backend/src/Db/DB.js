@@ -60,7 +60,8 @@ class DB {
         this.db = new Sequelize(this.config.database, this.config.username, this.config.password, {
             dialect: "sqlite",
             storage: "./database.sqlite",
-            logging: false
+            logging: false,
+            force: false
         });
     }
 

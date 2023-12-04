@@ -19,7 +19,9 @@ export default class Model {
         const names = Object.keys(Model.#registrations);
         // create all the models based on the objects in the #registrations attribute
         for(const modelName of names){
+            console.log("Defining model: "+modelName);
             const model = Model.#registrations[modelName];
+            console.log(model.getData());
             Model.#models[modelName] = await db.define(model.getName(), model.getData(), {
                 tableName: model.getTableName()   
             });

@@ -16,4 +16,8 @@ export default class Plage {
         this.description = description;
         this.image = image;
     }
+
+    static fromArray(plages: any): Plage[] {
+        return plages.map((plage: any) => new Plage(plage.id, plage.nom, plage.location, plage.latitude, plage.longitude, plage.description, plage.image));
+    }
 }

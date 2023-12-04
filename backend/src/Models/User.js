@@ -1,4 +1,3 @@
-import { UserAlreadyExists } from "../Utils/Error.js";
 import Model from "./Model.js";
 import { DataTypes } from "sequelize";
 
