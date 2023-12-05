@@ -3,37 +3,53 @@ import Plage from "../Models/Plage";
 
 const urlMarine = "https://marine-api.open-meteo.com/v1/marine";
 
-const urlWeather = "https://weather-api.open-meteo.com/v1/forecast";
+const urlWeather = "https://api.open-meteo.com/v1/forecast";
 
 const getWeather = async (plage: Plage) => {
     const params = {
         "latitude": plage.latitude,
         "longitude": plage.longitude,
-        "forecast_days": 1
+        "current": ["temperature_2m", "precipitation", "weather_code", "wind_speed_10m"]
     }
-    const responses = await fetchWeatherApi(urlWeather, params);
-    const response = responses[0];
-    const daily = response.daily()!;
-    console.log(daily);
+    const url = "https://api.open-meteo.com/v1/forecast";
 
+    const responses = await fetchWeatherApi(url, params);
 
+    // Helper function to form time ranges
     const range = (start: number, stop: number, step: number) =>
-	Array.from({ length: (stop - start) / step }, (_, i) => start + i * step);
+        Array.from({ length: (stop - start) / step }, (_, i) => start + i * step);
+
+    // Process first location. Add a for-loop for multiple locations or weather models
+    const response = responses[0];
+
+    // Attributes for timezone and location
     const utcOffsetSeconds = response.utcOffsetSeconds();
     const timezone = response.timezone();
     const timezoneAbbreviation = response.timezoneAbbreviation();
     const latitude = response.latitude();
     const longitude = response.longitude();
 
-    // Note: The order of weather variables in the URL query and the indices below need to match!
+    const current = response.current()!;
 
-    return daily;
+    // Note: The order of weather variables in the URL query and the indices below need to match!
+    const weatherData = {
+        current: {
+            time: new Date((Number(current.time()) + utcOffsetSeconds) * 1000),
+            temperature2m: current.variables(0)!.value(),
+            precipitation: current.variables(1)!.value(),
+            weatherCode: current.variables(2)!.value(),
+            windSpeed10m: current.variables(3)!.value(),
+        },
+
+    };
+
+    return weatherData;
 }
 
 const getMarine = async (plage: Plage) => {
     const params = {
-        "latitude": 43.4806,
-        "longitude": -1.5568,
+        "latitude": plage.latitude,
+        "longitude": plage.longitude,
         "daily": ["wave_height_max", "wave_direction_dominant", "wave_period_max", "wind_wave_height_max", "wind_wave_direction_dominant", "wind_wave_period_max"],
         "forecast_days": 1
     }
@@ -41,10 +57,9 @@ const getMarine = async (plage: Plage) => {
     const response = responses[0];
     const daily = response.daily()!;
 
-    console.log("ouaisouais")
 
     const range = (start: number, stop: number, step: number) =>
-	Array.from({ length: (stop - start) / step }, (_, i) => start + i * step);
+        Array.from({ length: (stop - start) / step }, (_, i) => start + i * step);
     const utcOffsetSeconds = response.utcOffsetSeconds();
     const timezone = response.timezone();
     const timezoneAbbreviation = response.timezoneAbbreviation();
@@ -61,13 +76,12 @@ const getMarine = async (plage: Plage) => {
             waveHeightMax: daily.variables(0)!.valuesArray()!,
             waveDirectionDominant: daily.variables(1)!.valuesArray()!,
             wavePeriodMax: daily.variables(2)!.valuesArray()!,
-        windWaveHeightMax: daily.variables(3)!.valuesArray()!,
+            windWaveHeightMax: daily.variables(3)!.valuesArray()!,
             windWaveDirectionDominant: daily.variables(4)!.valuesArray()!,
             windWavePeriodMax: daily.variables(5)!.valuesArray()!,
         },
 
     };
-    console.log(weatherData);
 
 
     return weatherData;

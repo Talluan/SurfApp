@@ -4,19 +4,21 @@ export default class Prevision {
     waveHeight: number;
     waveDirection: number;
     wavePeriod: number;
-    windWaveHeight: number;
-    windWaveDirection: number;
-    windWavePeriod: number;
+    precipitation: number;
+    temperature: number;
+    weatherCode: number;
+    windSpeed: number;
     date: Date;
 
-    constructor( date: Date, waveHeight: number, waveDirection: number, wavePeriod: number, windWaveHeight: number, windWaveDirection: number, windWavePeriod: number) {
+    constructor( date: Date, waveHeight: number, waveDirection: number, wavePeriod: number, precipitation: number, temperature: number, weatherCode: number, windSpeed: number) {
         this.date = date;
         this.waveHeight = waveHeight;
         this.waveDirection = waveDirection;
         this.wavePeriod = wavePeriod;
-        this.windWaveHeight = windWaveHeight;
-        this.windWaveDirection = windWaveDirection;
-        this.windWavePeriod = windWavePeriod;
+        this.precipitation = precipitation;
+        this.temperature = temperature;
+        this.weatherCode = weatherCode;
+        this.windSpeed = windSpeed;
     }
 
     static fromApiData(data: any): Prevision {
@@ -25,9 +27,10 @@ export default class Prevision {
             data.waveHeightMax,
             data.waveDirectionDominant,
             data.wavePeriodMax,
-            data.windWaveHeightMax,
-            data.windWaveDirectionDominant,
-            data.windWavePeriodMax
+            data.precipitation,
+            data.temperature2m,
+            data.weatherCode,
+            data.windSpeed10m
         );
     }
 

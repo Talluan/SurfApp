@@ -12,9 +12,9 @@
 			<p>Direction des vagues {{ prevision?.waveDirection }} °C</p>
 			<p>Hauteur des vagues {{ prevision?.waveHeight }}</p>
 			<p>Période des vagues {{ prevision?.wavePeriod }}</p>
-			<p>Direction du vent {{ prevision?.windWaveDirection }}</p>
-			<p>Hauteur du vent {{ prevision?.windWaveHeight }}</p>
-			<p>Période du vent {{ prevision?.windWavePeriod }}</p>
+			<p>Temps {{ prevision?.weatherCode }}</p>
+			<p>Vitesse du vent {{ prevision?.windSpeed }}</p>
+			<p>Précipitation {{ prevision?.precipitation }}</p>
 		</div>
 		</div>
 	</div>
@@ -36,13 +36,25 @@ const prevision = ref<Prevision>();
 const id = ref(router.currentRoute.value.params.id);
 const plage = ref<Plage>();
 
+const extractDataFromCalls = async () => {
+	const weatherResults = await getWeather(plage.value);
+	const marineResults = await getMarine(plage.value);
+	const data = {
+		time: weatherResults.current.time,
+		temperature2m: weatherResults.current.temperature2m,
+		windSpeed10m: weatherResults.current.windSpeed10m,
+		weatherCode: weatherResults.current.weatherCode,
+		precipitation: weatherResults.current.precipitation,
+		waveDirectionDominant: marineResults.daily.waveDirectionDominant,
+		waveHeightMax: marineResults.daily.waveHeightMax,
+		wavePeriodMax: marineResults.daily.wavePeriodMax
+	}
+	return Prevision.fromApiData(data);
+}
+
 const getPrevisions = async () => {
 	try {
-		// const weatherResults = await getWeather(plage.value);
-		const marineResults = await getMarine(plage.value);
-		// console.log(weatherResults);
-		console.log(marineResults);
-		prevision.value = Prevision.fromApiData(marineResults.daily);
+		prevision.value = await extractDataFromCalls();
 	} catch (error) {
 		console.log(error);
 	}
