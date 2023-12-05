@@ -6,7 +6,7 @@ import Login from './views/Login.vue';
 
 const routes = [
   { path: '/', component: Home },
-  { path: '/plage', component: Plage },
+  { path: '/plage/:id', component: Plage },
   { path: '/login', component: Login },
 ];
 

@@ -13,7 +13,7 @@
                         </el-form-item>
                         <el-button type="info" @click="holderLogin">Se connecter</el-button>
                     </el-form>
-
+                    <p>{{ error }}</p>
                 </el-card>
             </el-col>
         </el-row>
