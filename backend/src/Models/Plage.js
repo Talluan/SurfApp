@@ -34,7 +34,7 @@ const plage = new Model("Plage", "plage", {
             allowNull: true,
         },
     }, () => {
-        Model.getModel("Plage").belongsToMany(Model.getModel("User"), {through:Model.getModel("UserPlage"), foreignKey: "plageId", otherKey: "userId"});
+        Model.getModel("Plage").belongsToMany(Model.getModel("User"), {through:"UserPlage", foreignKey: "plageId", otherKey: "userId"});
     }
 );
 

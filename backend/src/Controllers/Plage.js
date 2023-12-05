@@ -1,6 +1,5 @@
 import PlageModel from '../Models/Plage.js';
 import { verifyBodyParams } from "../Helper/Request.js";
-import userPlage from '../Models/UserPlage.js';
 import UserModel from '../Models/User.js';
 import { DataNotFound } from '../Utils/Error.js';
 
@@ -83,7 +82,7 @@ class Plage {
         if (!user) {
             throw new DataNotFound("User", userData.id);
         }
-        return await userPlage.create({userId: user.id, plageId: plage.id});
+        return await user.addPlage(plage);
     }
 }
 

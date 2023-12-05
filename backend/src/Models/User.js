@@ -17,7 +17,7 @@ const user = new Model("User", "user", {
             allowNull: false,
         }
     }, () => {
-        Model.getModel("User").belongsToMany(Model.getModel("Plage"), {through:Model.getModel("UserPlage"), foreignKey: "userId", otherKey: "plageId"});
+        Model.getModel("User").belongsToMany(Model.getModel("Plage"), {through:"UserPlage", foreignKey: "userId", otherKey: "plageId"});
     }
 );
 
