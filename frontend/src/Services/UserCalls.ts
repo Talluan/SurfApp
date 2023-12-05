@@ -12,4 +12,14 @@ const login = async (username: string, password: string) => {
     return response;
 }
 
-export { login };
+const inscription = async (username: string, password: string) => {
+    let response = null;
+    try {
+        response = await axios.post(`${baseUrl}/users`, { username, password });
+    } catch (error) {
+        return error as AxiosError;
+    }
+    return response;
+}
+
+export { login, inscription };

@@ -12,6 +12,7 @@
                             <input type="password" v-model="credentials.password" />
                         </el-form-item>
                         <el-button type="info" @click="holderLogin">Se connecter</el-button>
+                        <el-button type="info" @click="holderInscription">S'inscrire</el-button>
                     </el-form>
                     <p>{{ error }}</p>
                 </el-card>
@@ -22,7 +23,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { login } from '../../Services/UserCalls';
+import { login, inscription } from '../../Services/UserCalls';
 import { User } from '../../Models/User.ts';
 import { useUserStore } from '../../Stores/UserStore.ts';
 import { useRouter } from 'vue-router';
@@ -56,5 +57,20 @@ const holderLogin = async () => {
         error.value = "Invalid credentials";
     }
 }
+
+const holderInscription = async () => {
+    const res = await inscription(credentials.username, credentials.password);
+    if (res.status == 200) {
+        console.log(res.data);
+        const newUser = new User(res.data.id, res.data.username, res.data.token);
+        store.setUser(newUser);
+        console.log(store.user);
+        router.push('/');
+    } else {
+        error.value = "Invalid credentials";
+    }
+
+}
+
 
 </script>
