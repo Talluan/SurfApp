@@ -1,9 +1,9 @@
 <template>
 	<div id="app">
 		<div class="beach-info">
-			<h1>{{ plage.name }}</h1>
-			<p>{{ plage.location }}</p>
-			<p>{{ plage.description }}</p>
+			<h1>{{ plage?.name }}</h1>
+			<p>{{ plage?.location }}</p>
+			<p>{{ plage?.description }}</p>
 		</div>
 		<div class="weather-forecast">
 			<h2>Prévisions Météorologiques</h2>
