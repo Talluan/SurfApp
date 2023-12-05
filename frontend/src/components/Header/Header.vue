@@ -14,8 +14,8 @@
 			<el-menu-item index="3-3" v-else><router-link to="/login">Se connecter</router-link></el-menu-item>
 		</el-menu>
 	</el-header>
-	<el-container>	
-		<img src="/surfmap-header.jpeg" />
+	<el-container style="display: flex; justify-content: center;">	
+		<img src="/surfmap-header.jpeg" style="width: 90vw;"/>
 	</el-container>
 </template>
 
