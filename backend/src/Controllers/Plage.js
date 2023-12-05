@@ -1,5 +1,6 @@
 import PlageModel from '../Models/Plage.js';
 import { verifyBodyParams } from "../Helper/Request.js";
+import userPlage from '../Models/UserPlage.js';
 
 /**
  * Represents a Plage controller.
@@ -69,6 +70,19 @@ class Plage {
             throw new MissingParam("Plage", requiredParams);
         }
         return await PlageModel.delete(data);
+    }
+
+    static likePage = async (idPlage, userData) => {
+        const plage = await PlageModel.getOne(idPlage);
+        if (!plage) {
+            throw new PlageNotFound(idPlage);
+        }
+        const user = await UserModel.getOne(userData.id);
+        if (!user) {
+            throw new UserNotFound(userData.id);
+        }
+        return await userPlage.create({userId: user.id, plageId: plage.id});
+
     }
 }
 

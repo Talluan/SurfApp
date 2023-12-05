@@ -4,7 +4,7 @@ import { DataNotFound, MissingParam, WrongCredentials } from "../Utils/Error.js"
 import bcrypt from "bcrypt";
 import { UserAlreadyExists } from "../Utils/Error.js";
 import { isNullOrUndefined, generateToken } from "../Helper/Tools.js";
-
+import jwt from "jsonwebtoken";
 
 /**
  * Represents a User controller.
@@ -107,6 +107,10 @@ class User {
      */
     static hashPassword = async (password) => {
         return await bcrypt.hash(password, 10);
+    }
+
+    static verifyToken = async (token) => {
+        return await jwt.verify(token, process.env.JWT_SECRET);
     }
 }
 

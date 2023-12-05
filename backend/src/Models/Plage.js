@@ -34,9 +34,10 @@ const plage = new Model("Plage", "plage", {
             allowNull: true,
         },
     }, () => {
-
+        Model.getModel("Plage").belongsToMany(Model.getModel("UserPlage"), {through:Model.getModel("UserPlage"), foreignKey: "plageId", otherKey: "userId"});
     }
 );
+
 
 plage.getByNom = (nom) => {
     return new Promise((resolve, reject) => {
