@@ -1,22 +1,35 @@
 import Plage from "./Plage";
 
 export default class Prevision {
-    id: number;
+    waveHeight: number;
+    waveDirection: number;
+    wavePeriod: number;
+    windWaveHeight: number;
+    windWaveDirection: number;
+    windWavePeriod: number;
     date: Date;
-    plage: Plage;
-    temperature: number;
-    vent: number;
-    humidite: number;
-    pluie: number;
-    uv: number;
-    constructor(id: number, date: Date, plage: Plage, temperature: number, vent: number, humidite: number, pluie: number, uv: number) {
-        this.id = id;
+
+    constructor( date: Date, waveHeight: number, waveDirection: number, wavePeriod: number, windWaveHeight: number, windWaveDirection: number, windWavePeriod: number) {
         this.date = date;
-        this.plage = plage;
-        this.temperature = temperature;
-        this.vent = vent;
-        this.humidite = humidite;
-        this.pluie = pluie;
-        this.uv = uv;
+        this.waveHeight = waveHeight;
+        this.waveDirection = waveDirection;
+        this.wavePeriod = wavePeriod;
+        this.windWaveHeight = windWaveHeight;
+        this.windWaveDirection = windWaveDirection;
+        this.windWavePeriod = windWavePeriod;
     }
+
+    static fromApiData(data: any): Prevision {
+        return new Prevision(
+            new Date(data.time),
+            data.waveHeightMax,
+            data.waveDirectionDominant,
+            data.wavePeriodMax,
+            data.windWaveHeightMax,
+            data.windWaveDirectionDominant,
+            data.windWavePeriodMax
+        );
+    }
+
+
 }
