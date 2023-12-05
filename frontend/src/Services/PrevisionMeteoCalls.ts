@@ -61,7 +61,7 @@ const getMarine = async (plage: Plage) => {
             waveHeightMax: daily.variables(0)!.valuesArray()!,
             waveDirectionDominant: daily.variables(1)!.valuesArray()!,
             wavePeriodMax: daily.variables(2)!.valuesArray()!,
-            windWaveHeightMax: daily.variables(3)!.valuesArray()!,
+        windWaveHeightMax: daily.variables(3)!.valuesArray()!,
             windWaveDirectionDominant: daily.variables(4)!.valuesArray()!,
             windWavePeriodMax: daily.variables(5)!.valuesArray()!,
         },

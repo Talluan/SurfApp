@@ -5,8 +5,8 @@
 
 			<article class="flex-grow" />
 			<el-menu-item index="2">
-				<el-input class="w-100 m-2" size="large" placeholder="Beach" prefix-icon="Search"
-					style="width: 600px"></el-input>
+				<el-select-v2 v-model="selectedPlage" filterable :options="options"
+					placeholder="Please select" style="width: 240px; margin-right: 16px; vertical-align: middle" />
 				<el-button type="primary" size="large" icon="Search" color="#636466">Search</el-button>
 			</el-menu-item>
 			<router-link to="/plage"><el-menu-item index="3-2">Mes plages</el-menu-item></router-link>
@@ -14,17 +14,28 @@
 			<el-menu-item index="3-3" v-else><router-link to="/login">Se connecter</router-link></el-menu-item>
 		</el-menu>
 	</el-header>
-	<el-container>
+	<el-container>	
 		<img src="/surfmap-header.jpeg" />
 	</el-container>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useRouter } from 'vue-router';
 const router = useRouter();
 import { useUserStore } from '../../Stores/UserStore.ts';
+import { usePlagesStore } from '../../Stores/PlageStore.ts';
+import PlageModel from '../../Models/Plage';
+import { ref, computed } from 'vue';
+
 
 const store = useUserStore();
+const plageStore = usePlagesStore();
+const selectedPlage = ref<PlageModel>();
+
+const options = computed(() => plageStore.plages?.map((plage) => ({
+	value: plage.id,
+	label: plage.nom,
+}))|| []);
 
 
 const logout = () => {
@@ -32,6 +43,7 @@ const logout = () => {
 	store.logout();
 	router.push('/');
 }
+
 
 </script>
 

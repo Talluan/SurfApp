@@ -1,7 +1,7 @@
 <template>
 	<el-card :body-style="{ padding: '10px' }" style="height: auto;">
 	  <div style="text-align: center; margin-top: 10px;">
-		<h3>{{ plage.name }}</h3>
+		<h3>{{ plage.nom }}</h3>
 		<p>{{ plage.location }}</p>
 		<p>{{ plage.description }}</p>
 	  </div>
