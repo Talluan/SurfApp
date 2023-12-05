@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<div class="beach-info">
-			<h1>{{ plage?.name }}</h1>
+			<h1>{{ plage?.nom }}</h1>
 			<p>{{ plage?.location }}</p>
 			<p>{{ plage?.description }}</p>
 		</div>

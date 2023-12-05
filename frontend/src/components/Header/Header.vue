@@ -7,7 +7,7 @@
 			<el-menu-item index="2">
 				<el-select-v2 v-model="selectedPlage" filterable :options="options"
 					placeholder="Please select" style="width: 240px; margin-right: 16px; vertical-align: middle" />
-				<el-button type="primary" size="large" icon="Search" color="#636466">Search</el-button>
+				<el-button type="primary" size="large" icon="Search" color="#636466" @click="handleSearch">Search</el-button>
 			</el-menu-item>
 			<router-link to="/plage"><el-menu-item index="3-2">Mes plages</el-menu-item></router-link>
 			<el-menu-item index="3-2" @click="logout" v-if="store.user != null">Se déconnecter</el-menu-item>
@@ -36,6 +36,11 @@ const options = computed(() => plageStore.plages?.map((plage) => ({
 	value: plage.id,
 	label: plage.nom,
 }))|| []);
+
+const handleSearch = () => {
+	console.log(selectedPlage.value);
+	router.push({path: '/plage/' + selectedPlage.value});
+}
 
 
 const logout = () => {
