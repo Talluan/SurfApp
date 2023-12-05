@@ -1,6 +1,7 @@
 <template>
 	<div id="app">
 		<div class="beach-info">
+			<el-button type="success" @click="handleLike">Ajouter cette plage aux favoris</el-button>
 			<h1>{{ plage?.nom }}</h1>
 			<p>{{ plage?.location }}</p>
 			<p>{{ plage?.description }}</p>
@@ -27,9 +28,12 @@ import { ref, onMounted } from 'vue';
 import router from '../router.ts';
 import { getWeather, getMarine } from "../Services/PrevisionMeteoCalls";
 import Prevision from "../Models/Prevision.ts";
+import { likePlage } from "../Services/PlageCalls.ts" 
+import { useUserStore } from '../Stores/UserStore';
 
 
 const plageStore = usePlagesStore();
+const userStore = useUserStore();
 
 
 const prevision = ref<Prevision>();
@@ -55,6 +59,18 @@ const extractDataFromCalls = async () => {
 const getPrevisions = async () => {
 	try {
 		prevision.value = await extractDataFromCalls();
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+const handleLike = async () => {
+	try {
+		console.log("handleLike");
+		if (userStore.user?.token) {
+			const res = await likePlage(plage.value?.id, userStore.user?.token);
+			console.log(res);
+		}
 	} catch (error) {
 		console.log(error);
 	}

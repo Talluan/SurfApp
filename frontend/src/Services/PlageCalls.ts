@@ -12,4 +12,19 @@ const getPlages = async () => {
     return response;
 }
 
-export { getPlages };
+const likePlage = async (idPlage : string, token : string) => {
+    let response = null;
+    console.log(token);
+    try {
+        response = await axios.post(`${baseUrl}/plages/like/${idPlage}`,{},{
+            headers:{
+                "Authorization":token
+            }
+        });
+    } catch (error) {
+        return error as AxiosError;
+    }
+    return response;
+}
+
+export { getPlages, likePlage };
