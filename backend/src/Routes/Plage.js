@@ -13,6 +13,7 @@ new Route("get Plages", METHOD.GET, "/plages", async (req, res, next) => {
         Logger.error("Erreur sur GET /plages");
         next(error);
     }
+
 });
 
 new Route("create Plage", METHOD.POST, "/plages", async (req, res, next) => {
@@ -51,11 +52,13 @@ new Route("delete Plage", METHOD.DELETE, "/plages", async (req, res, next) => {
 new Route("like Plage", METHOD.POST, "/plages/like/:id", async (req, res, next) => {
     try {
         Logger.info("POST /plages/like");
-        const userData = User.verifyToken(req.headers.authorization);
+        console.log(req.headers.authorization);
+        const userData = await User.verifyToken(req.headers.authorization);
         console.log(userData);
         const plage = await Plage.likePlage(req.params.id, userData);
         res.status(200).json(plage);
     } catch (error) {
+        console.log(error);
         Logger.error("Erreur sur POST /plages/like");
         next(error);
     }

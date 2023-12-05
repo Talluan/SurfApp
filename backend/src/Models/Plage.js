@@ -34,7 +34,7 @@ const plage = new Model("Plage", "plage", {
             allowNull: true,
         },
     }, () => {
-        Model.getModel("Plage").belongsToMany(Model.getModel("UserPlage"), {through:Model.getModel("UserPlage"), foreignKey: "plageId", otherKey: "userId"});
+        Model.getModel("Plage").belongsToMany(Model.getModel("User"), {through:Model.getModel("UserPlage"), foreignKey: "plageId", otherKey: "userId"});
     }
 );
 
@@ -42,6 +42,12 @@ const plage = new Model("Plage", "plage", {
 plage.getByNom = (nom) => {
     return new Promise((resolve, reject) => {
         Model.getModel("Plage").findOne({where: {nom: nom}}).then(resolve).catch(reject);
+    });
+}
+
+plage.getById = (id) => {
+    return new Promise((resolve, reject) => {
+        Model.getModel("Plage").findOne({where: {id: id}}).then(resolve).catch(reject);
     });
 }
 

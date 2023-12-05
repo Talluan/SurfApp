@@ -1,7 +1,7 @@
 import Model from "./Model.js";
 import { DataTypes } from "sequelize";
 
-const user = new Model("User", "users", {
+const user = new Model("User", "user", {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -17,13 +17,19 @@ const user = new Model("User", "users", {
             allowNull: false,
         }
     }, () => {
-        Model.getModel("User").belongsTo(Model.getModel("UserPlage"), {through:Model.getModel("UserPlage"), foreignKey: "userId", otherKey: "plageId"});
+        Model.getModel("User").belongsToMany(Model.getModel("Plage"), {through:Model.getModel("UserPlage"), foreignKey: "userId", otherKey: "plageId"});
     }
 );
 
 user.getByUsername = (username) => {
     return new Promise((resolve, reject) => {
         Model.getModel("User").findOne({where: {username: username}}).then(resolve).catch(reject);
+    });
+}
+
+user.getById = (id) => {
+    return new Promise((resolve, reject) => {
+        Model.getModel("User").findOne({where: {id: id}}).then(resolve).catch(reject);
     });
 }
 
